@@ -1,0 +1,8 @@
+.main{
+  display: flex;
+  justify-content: center; 
+}
+
+.navmain{
+  backdrop-filter: saturate(180%) blur(5px);
+}
