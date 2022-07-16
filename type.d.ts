@@ -1,3 +1,9 @@
+import type {
+  TypedObject,
+} from '@portabletext/types'
+
+
+
 export interface Post {
   _id: string;
   _createdAt: string;
@@ -16,7 +22,7 @@ export interface Post {
   slug: {
     current: string;
   };
-  body: Record<string, any>;
+  body: TypedObject[];
   categories: Array<string>;
 }
 
@@ -34,4 +40,21 @@ export interface Comment {
   _rev: string;
   _type: string;
   _updatedAt: string;
+}
+
+
+export type Content = {
+  publishedAt: string;
+  title: string;
+  slug: { current: any };
+  intro: any;
+  summary: string;
+  main: any;
+  readingTime: string;
+  count: number;
+}
+
+
+export type Views = {
+  count: number;
 }

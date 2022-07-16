@@ -6,8 +6,6 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import ColorModeSwitch from "./ColorModeSwitch";
 
 import style from "./Header.module.css"
-import ArticleList from "./BlogPost";
-import { sanityClient } from "../../sanity";
 
 export interface NavLinkProps {
   children: ReactNode;
