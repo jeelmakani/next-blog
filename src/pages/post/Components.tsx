@@ -1,7 +1,10 @@
 import style from "../../../styles/Home.module.css";
-import { PortableText, PortableTextComponents } from '@portabletext/react'
-import { sanityClient, urlFor } from "../../../sanity";
-import Image from "next/image";
+import { PortableTextComponents } from '@portabletext/react'
+import { urlFor } from "../../../sanity";
+import { Code, Image, Link, ListItem, OrderedList, Text, UnorderedList } from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+import Nextlink from 'next/link'
+
 
 
 const myComponents: PortableTextComponents = {
@@ -9,34 +12,41 @@ const myComponents: PortableTextComponents = {
     image: ({ value }: any) => {
       return (
         <Image
-          src={urlFor(value).url()}
+          src={urlFor(value).width(320).height(240).fit('max').auto('format').url()}
           alt={value.alt || ''}
         />
       )
     }
   },
   marks: {
-    em: ({ children }) => <em>{children}</em>,
+    em: ({ children }) => <Text as="em">{children}</Text>,
     strong: ({ children }) => <strong>{children}</strong>,
     link: ({ value, children }) => {
       const target = (value?.href || '').startsWith('http') ? '_blank' : undefined
       return (
-        <a href={value?.href} target={target} >
-          {children}
-        </a>
+        <Nextlink href={value?.href} target={target}>
+        <Link color='blue.500'>
+          {children}{' '}<ExternalLinkIcon mx='2px' />
+        </Link></Nextlink>
       )
     },
-    code: ({ children }) => <code className={style.bodycode}>{children}</code>,
+    code: ({ children }) => <Code fontSize='code' >{children}</Code>
+
   },
   block: {
-    h1: ({ children }) => <h1 className={style.bodyh1}>{children}</h1>,
+    h1: ({ children }) => <Text fontSize='5xl' >{children}</Text>,
+    h2: ({ children }) => <Text fontSize='4xl'>{children}</Text>,
+    h3: ({ children }) => <Text fontSize='3xl'>{children}</Text>,
+    h4: ({ children }) => <Text fontSize='2xl'>{children}</Text>,
+    h5: ({ children }) => <Text fontSize='xl'>{children}</Text>,
     blockquote: ({ children }) => <blockquote className={style.blockquote}>{children}</blockquote>,
-    h2: ({ children }) => <h2 className={style.bodyh2}>{children}</h2>,
-    h3: ({ children }) => <h3 className={style.bodyh3}>{children}</h3>,
-    h4: ({ children }) => <h4 className={style.bodyh4}>{children}</h4>,
-    h5: ({ children }) => <h5 className={style.bodyh5}>{children}</h5>,
+    normal: ({ children }) => <Text fontSize='xl'>{children}</Text>,
   },
-}
+  list: {
+    bullet: ({ children }) => <ul><Text fontSize='xl'>{children}</Text></ul>,
+    number: ({ children }) => <ol><Text fontSize='xl'>{children}</Text></ol>,
+  },
+};
 
 
 export default myComponents

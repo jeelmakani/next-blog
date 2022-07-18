@@ -57,7 +57,7 @@ const Header = () => {
 
   return (
     <div className={style.main}>
-      <Box px={4} borderRadius={'md'} className={style.navmain} boxShadow={"xl"} zIndex={'tooltip'} position={'fixed'} width={'100%'} maxW={'7xl'}>
+      <Box px={4} borderRadius={'md'} className={style.navmain} boxShadow={"xl"} zIndex={'tooltip'} position={'fixed'} width={'100%'} maxW={'8xl'}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}

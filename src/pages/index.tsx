@@ -6,7 +6,7 @@ import styles from '../../styles/Home.module.css'
 import { Post } from '../../type'
 
 import { BlogCard } from './BlogPost'
-import Header from '../components/Header'
+
 import { Box ,Flex } from '@chakra-ui/react'
 
 interface Props {
@@ -22,25 +22,31 @@ const Home: React.FC<Props> = ({ posts }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container maxWidth={'8xl'}>
-        <Header />
 
       </Container>
-      <Flex
-        flex-direction={'column'}
-        display={{ base: 'block', md: 'block', lg: 'flex' }}
-        maxW={'7xl'}
-        alignItems={'center'}
-        justifyContent={'center'}
-        marginTop={'2rem'}
-        marginBottom={'2rem'}
+      <Box
+      maxW='7xl'
+      display="flex"
+      flexDirection='row'
+      justifyContent='center'
+      alignItems='center'
+      flexWrap='wrap'
+      gap={8}
+      margin={10}
       >
         {posts.map((p) => {
           return (
-            <Box key={p._id}>
+            <Box display={'flex'} flexDirection="row" key={p._id}>
               <BlogCard post={p} />
             </Box>)
         })}
-      </Flex>
+         {posts.map((p) => {
+          return (
+            <Box display={'flex'} flexDirection="row" key={p._id}>
+              <BlogCard post={p} />
+            </Box>)
+        })}
+        </Box>
     </div>
   )
 }

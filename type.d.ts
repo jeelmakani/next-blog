@@ -5,8 +5,10 @@ import type {
 
 
 export interface Post {
+  publishedAt: string
   _id: string;
   _createdAt: string;
+  _updatedAt: string;
   title: string;
   author: {
     name: string;
@@ -22,7 +24,7 @@ export interface Post {
   slug: {
     current: string;
   };
-  body: TypedObject[];
+  body: TypedObject[] | any;
   categories: Array<string>;
 }
 
