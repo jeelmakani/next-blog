@@ -1,5 +1,5 @@
 
-import { Box, Container, Divider, Grid, GridItem, Heading, Image, Img, Text, useColorModeValue } from "@chakra-ui/react";
+import { Avatar, Box, Container, Divider, Grid, GridItem, Heading, Image, Stack, Text } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import { useEffect } from "react";
@@ -11,6 +11,7 @@ import { sanityClient, urlFor } from "../../../sanity";
 import readingTime from "reading-time";
 
 import { formatDate } from "../../utils/date";
+import Comment from "./comment"
 
 interface Props {
   post: Post;
@@ -28,7 +29,7 @@ const BlogPost: React.FC<Props> = ({ post }) => {
         <title>{post.title}</title>
       </Head>
       <Container
-        maxWidth="5xl"
+        maxWidth="3xl"
         display="flex"
         flexDirection="column"
         alignItems="center"
@@ -36,44 +37,64 @@ const BlogPost: React.FC<Props> = ({ post }) => {
         marginTop="5rem"
       >
         <Heading as="h1" size="xl"
-          fontSize={{ base: "2rem", md: '3rem', lg: '3.75rem' }}
+          fontSize={{ base: "2rem", md: '3rem', lg: '3.25rem' }}
+          mb="2rem"
+          mt={
+            "1rem"
+          }
         >
           {post.title}
         </Heading>
         <Box>
-          
+
           <Box display="flex" marginBottom={5} flexDirection={'column'} gap={5} justifyContent="center" alignItems={'center'}>
-          <Text as="div" fontSize={{ base: "0.5rem", md: '0.75rem', lg: '1.25rem' }} >
-            {post.description}
-          </Text>
             <Image
-              src={urlFor(post.mainImage).url()}
+              // src={urlFor(post.mainImage).url()}
+              src={"https://liebling.eduardogomez.io/content/images/size/w2000/2022/06/3.jpg"}
               alt={post.title}
-              width="auto"
+              width="100%"
               height="80"
               borderRadius='lg'
+              objectFit="cover"
             />
 
-           
+
           </Box>
+          <Text fontSize={{ base: "lg", md: 'lg', lg: 'xl' }} fontWeight='extrabold' mb={5} >
+            {post.description}
+          </Text>
           <Grid templateColumns='repeat(2,1fr)'
-              templateRows='repeat(1,1ft)'
-              gap={2}>
-              <GridItem
-                colStart={1}
-              >
-                {formatDate(post.publishedAt)}
-              </GridItem>
-              <GridItem
-                colEnd={6}>
-                {readingTime(blockContentToPlainText(post.body)).text}
-              </GridItem>
-            </Grid>
-          <Divider />
+            templateRows='repeat(1,1ft)'
+            gap={2}
+            marginBottom={5}
+          >
+            <GridItem
+              colStart={1}
+              fontWeight="extrabold"
+            >
+              <Stack direction={'row'} spacing={4} align={'center'}>
+                <Avatar
+                  src={urlFor(post.author.image).width(40).url()}
+                />
+                <Text fontWeight={600}>{post.author.name} · {formatDate(post.publishedAt)}</Text>
+              </Stack>
+            </GridItem>
+            <GridItem
+              colEnd={6} fontWeight="extrabold"
+              mt={3}>
+              {readingTime(blockContentToPlainText(post.body)).text}
+            </GridItem>
+          </Grid>
+          <Box>
+
+          </Box>
+          <Divider borderBottomWidth={3} />
           <PortableText
             components={myComponents}
             value={post.body}
           />
+          <Divider borderBottomWidth={3} />
+          <Comment post={post} />
         </Box>
       </Container>
     </>);

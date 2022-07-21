@@ -1,7 +1,7 @@
-import style from "../../../styles/Home.module.css";
+
 import { PortableTextComponents } from '@portabletext/react'
 import { urlFor } from "../../../sanity";
-import { Code, Image, Link, ListItem, OrderedList, Text, UnorderedList } from "@chakra-ui/react";
+import { Alert, Code, Image, Link, OrderedList, Text, UnorderedList } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import Nextlink from 'next/link'
 
@@ -25,29 +25,40 @@ const myComponents: PortableTextComponents = {
       const target = (value?.href || '').startsWith('http') ? '_blank' : undefined
       return (
         <Nextlink href={value?.href} target={target}>
-        <Link color='blue.500'>
-          {children}{' '}<ExternalLinkIcon mx='2px' />
-        </Link></Nextlink>
+          <Link color='blue.500'>
+            {children}{' '}<ExternalLinkIcon mx='2px' />
+          </Link></Nextlink>
       )
     },
-    code: ({ children }) => <Code fontSize='code' >{children}</Code>
+    code: ({ children }) => <Code colorScheme="yellow" fontSize="0.84em"  >{children}</Code>
 
   },
   block: {
-    h1: ({ children }) => <Text fontSize='5xl' >{children}</Text>,
-    h2: ({ children }) => <Text fontSize='4xl'>{children}</Text>,
-    h3: ({ children }) => <Text fontSize='3xl'>{children}</Text>,
-    h4: ({ children }) => <Text fontSize='2xl'>{children}</Text>,
-    h5: ({ children }) => <Text fontSize='xl'>{children}</Text>,
-    blockquote: ({ children }) => <blockquote className={style.blockquote}>{children}</blockquote>,
-    normal: ({ children }) => <Text fontSize='xl'>{children}</Text>,
+    h1: ({ children }) => <Text fontSize='3xl' fontWeight="bold" letterSpacing="wide" mt={8} >{children}</Text>,
+    h2: ({ children }) => <Text fontSize='2xl' fontWeight="bold" letterSpacing="wide" mt={8}>{children}</Text>,
+    h3: ({ children }) => <Text fontSize='xl' fontWeight="bold" letterSpacing="wide" mt={8}>{children}</Text>,
+    h4: ({ children }) => <Text fontSize='lg' letterSpacing="wide" pt={8}>{children} </Text>,
+    h5: ({ children }) => <Text fontSize='md' letterSpacing="wide" pt={8}>{children}</Text>,
+    // blockquote: ({ children }) => <blockquote >{children}</blockquote>,
+    blockquote: ({ children }) => <Alert
+      mt={4}
+      w="98%"
+      // bg={useColorModeValue('gray.100', 'white')}
+      variant="left-accent"
+      status="info"
+      css={{
+        "> *:first-of-type": {
+          marginTop: 0,
+          marginLeft: 8,
+        },
+      }}
+    >{children}</Alert>,
+    normal: ({ children }) => <Text fontSize='md' letterSpacing="wide" pt={8}>{children}</Text>,
   },
   list: {
-    bullet: ({ children }) => <ul><Text fontSize='xl'>{children}</Text></ul>,
-    number: ({ children }) => <ol><Text fontSize='xl'>{children}</Text></ol>,
-  },
-};
-
-
+    bullet: ({ children }) => <UnorderedList fontSize='md' letterSpacing="wide" pt={8}>{children}</UnorderedList>,
+    number: ({ children }) => <OrderedList fontSize='md' letterSpacing="wide" pt={8}>{children}</OrderedList>,
+  }
+}
 export default myComponents
 

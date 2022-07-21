@@ -23,6 +23,7 @@ export interface Props {
 
 export const BlogCard: React.FC<Props> = ({ post }) => {
   return (
+
     <Box
       id='blog-card'
       minW={'345px'}
@@ -55,13 +56,13 @@ export const BlogCard: React.FC<Props> = ({ post }) => {
       </Box>
       <Stack>
         <Flex gap={2}>
-        {post.categories.map((tag)=>{
-          return (
-            <Text as='p' key={tag}>
-              {tag}
-            </Text>
-          );
-        })} </Flex>
+          {post.categories.map((tag) => {
+            return (
+              <Text as='p' key={tag}>
+                {tag}
+              </Text>
+            );
+          })} </Flex>
         <Heading
           color={useColorModeValue('gray.700', 'white')}
           fontSize={'2xl'}
