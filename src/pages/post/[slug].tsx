@@ -2,7 +2,7 @@
 import { Avatar, Box, Container, Divider, Grid, GridItem, Heading, Image, Stack, Text } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
-import { useEffect } from "react";
+
 import { PortableText } from "@portabletext/react"
 import { blockContentToPlainText } from "react-portable-text"
 import { Post } from "../../../type";
@@ -18,10 +18,6 @@ interface Props {
 }
 
 const BlogPost: React.FC<Props> = ({ post }) => {
-  useEffect(() => {
-    console.log(post.body);
-  }, [post]);
-
 
   return (
     <>
@@ -35,6 +31,7 @@ const BlogPost: React.FC<Props> = ({ post }) => {
         alignItems="center"
         justifyContent="center"
         marginTop="5rem"
+        width='100%'
       >
         <Heading as="h1" size="xl"
           fontSize={{ base: "2rem", md: '3rem', lg: '3.25rem' }}
@@ -94,12 +91,17 @@ const BlogPost: React.FC<Props> = ({ post }) => {
             value={post.body}
           />
           <Divider borderBottomWidth={3} />
-          <Comment post={post} />
+          <Comment postId={post._id} comments={post.comments} />
         </Box>
       </Container>
     </>);
 }
 export default BlogPost;
+
+
+
+
+
 
 export const getStaticPaths = async () => {
   const query = `*[_type == "post"] {

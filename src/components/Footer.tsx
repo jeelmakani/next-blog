@@ -15,7 +15,6 @@ import { ReactNode } from 'react';
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { BiMailSend } from 'react-icons/bi';
 
-import { NavLink, routes} from  './Header'
 
 
 const Logo = (props: any) => {
@@ -81,17 +80,21 @@ export default function Footer() {
   return (
     <Box
       color={useColorModeValue('gray.700', 'gray.200')}
-      boxShadow={"xl"}>
-      <Container as={Stack} maxW={'6xl'} py={10}>
+      boxShadow={"5xl"}
+      display="flex"
+    >
+      <Container as={Stack} maxW={'6xl'} py={5}>
         <SimpleGrid
-          templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
-          spacing={8}>
+          templateColumns={{ sm: '1fr 1fr', md: '2fr 2fr' }}
+          spacing={8}
+          alignItems={'center'}
+        >
           <Stack spacing={6}>
             <Box>
               {/* <Logo color={useColorModeValue('gray.700', 'white')} /> */}
             </Box>
             <Text fontSize={'sm'}>
-              © 2022 Grow More Consultancy. All rights reserved
+              Open source software for the internet.  Built by Jeel Makani.
             </Text>
             <Stack direction={'row'} spacing={6}>
               <SocialButton label={'Twitter'} href={'#'}>
@@ -105,21 +108,7 @@ export default function Footer() {
               </SocialButton>
             </Stack>
           </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Company</ListHeader>
-            {routes.map((link) => (
-                <NavLink key={link.nameKey} href={link.to}>{link.nameKey}</NavLink>
-              ))}
-          </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Support</ListHeader>
-            <Link href={'#'}>Help Center</Link>
-            <Link href={'#'}>Terms of Service</Link>
-            <Link href={'#'}>Legal</Link>
-            <Link href={'#'}>Privacy Policy</Link>
-            <Link href={'#'}>Satus</Link>
-          </Stack>
-          <Stack align={'flex-start'}>
+          <Stack align={'flex-end'}>
             <ListHeader>Stay up to date</ListHeader>
             <Stack direction={'row'}>
               <Input
@@ -135,6 +124,9 @@ export default function Footer() {
                 color={useColorModeValue('white', 'gray.800')}
                 _hover={{
                   bg: 'green.600',
+                }}
+                _focus={{
+
                 }}
                 aria-label="Subscribe"
                 icon={<BiMailSend />}
